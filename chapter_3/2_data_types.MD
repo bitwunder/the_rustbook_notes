@@ -74,8 +74,9 @@ fn main ()
   let constant: isize = 356;
   
   println!("{constant}");
+}
+```
 
-| ----------------
 
 
 * Number literals can also use `_` as a visual separator 
@@ -92,3 +93,176 @@ fn main ()
 |Byte (u8 only) | b'A'
 
 
+
+
+
+#### Integer Overflow
+If you try to change the variable to a value outside of that range, such as 256, integer overflow will occur,
+
+
+* When you’re compiling in debug mode, Rust includes checks for integer overflow
+* to panic at runtime
+* if overflow occurs, Rust performs **two’s complement wrapping**.
+
+
+| ---------------
+
+To explicitly handle the possibility of overflow,
+you can use these families of methods
+provided by the standard library for primitive numeric types:
+
+|----------
+* When you’re compiling in release mode with the --release flag, Rust does not include checks for integer overflow
+
+
+    * Wrap in all modes with the wrapping_* methods, such as wrapping_add
+    * Return the None value if there is overflow with the checked_* methods
+    * Return the value and a boolean indicating whether there was overflow with the overflowing_* methods
+    * Saturate at the value’s minimum or maximum values with saturating_* methods
+
+
+| ----------------
+
+
+### 2. Floating point
+* All floating-point types are signed.
+* The f32 type is a single-precision float, and f64 has double precision.
+
+```rust
+fn main() {
+    let x = 2.0; // f64
+
+    let y: f32 = 3.0; // f32
+}
+```
+
+
+### 3. Operations
+```rust
+fn main() {
+    // addition
+    let sum = 5 + 10;
+
+    // subtraction
+    let difference = 95.5 - 4.3;
+
+    // multiplication
+    let product = 4 * 30;
+
+    // division
+    let quotient = 56.7 / 32.2;
+    let floored = 2 / 3; // Results in 0
+
+    // remainder
+    let remainder = 43 % 5;
+}
+```
+
+
+### 4. Boolean
+```rust
+fn main() {
+    let t = true;
+
+    let f: bool = false; // with explicit type annotation
+}
+```
+
+### 5. Character
+* Rust’s char type is `four bytes` in size and represents a `Unicode` Scalar Value
+* can represent a lot more than just ASCII.
+  * Accented letters;
+  * Chinese, Japanese, and Korean characters;
+  * emoji;
+  * zero-width spaces
+ 
+```rust
+fn main() {
+    let c = 'z';
+    let z: char = 'ℤ'; // with explicit type annotation
+    let heart_eyed_cat = '😻';
+}
+```
+
+
+---
+## Compound Types
+* Compound types can group `multiple` values `into one` type.
+* Rust has two **primitive** compound types: `tuples` and `arrays`.
+
+
+### The Tuple
+* Tuples have a fixed length: once declared,
+* they **cannot grow or shrink** in size.
+
+
+> `Destructuring` - turn it into multiple separate variables
+> ( break the single tuple into three parts )
+
+
+> The tuple `without any values` has a special name, `unit`
+> This value and its corresponding type are both written `()`
+> and represent an empty value or an empty return type.
+>
+> Expressions implicitly return the unit value if they don’t return any other value.
+
+
+```rust
+fn main() {
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+}
+```
+
+| -----------------
+
+```rust
+fn main() {
+    let tup = (500, 6.4, 1);
+
+    let (x, y, z) = tup;
+
+    println!("The value of y is: {y}");
+}
+```
+
+```rust
+fn main() {
+    let x: (i32, f64, u8) = (500, 6.4, 1);
+
+    let five_hundred = x.0;
+
+    let six_point_four = x.1;
+
+    let one = x.2;
+}
+```
+
+### The Array
+*  every element of an array must have the same type. 
+*  arrays in Rust have a `fixed length`.
+* Arrays are useful when you want your data allocated on the `stack` rather than the `heap`
+
+| -
+
+* Invalid Array Element Access results
+* in a **runtime error**
+* at the point of using an invalid value in the indexing operation.
+
+
+```rust
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+}
+```
+
+```rust
+let a: [i32; 5] = [1, 2, 3, 4, 5];
+```
+
+* You can also initialize an array
+* to contain the **same value for each element** by specifying the initial
+* value, followed by a semicolon and then the length
+
+```rust
+let a = [3; 5];
+```
