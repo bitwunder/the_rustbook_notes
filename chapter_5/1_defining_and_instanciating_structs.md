@@ -1,3 +1,6 @@
+[<< Introduction](./introduction.md_) | [Example of program with Structs >>](./example_using_structs.md)
+
+
 # Defining and Instantiating Structs
 * Structs are similar to tuples in that both hold multiple related values
 * Like tuples, the pieces of a struct can be different types. 
