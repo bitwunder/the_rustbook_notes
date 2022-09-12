@@ -91,14 +91,144 @@ fn main() {
 
 
 #### -------------------------------
+
 * This syntax is also allowed:
 
 ```rust
 
 let s = String::from("hello");
+let len = s.len();
 
 let slice = &s[0..2];
 let slice = &s[..2];
+let slice = &s[..]; // Whole string
+let slice = &s[..len];
+```
+
+#### --------------------------------
+
+* !!! HERE
+> Note: String slice range indices must occur **at valid UTF-8 character boundaries****
+> 
+> If you attempt to create a string slice
+> 
+> in the middle of a multibyte character,
+> 
+> your program will exit with an error.
+
+
+#### --------------------------------
+
+```rust
+fn main() {
+    let mut s = String::from("hello world");
+
+    let word = first_word(&s);
+
+    s.clear(); // error!
+
+    println!("the first word is: {}", word);
+}
+```
+
+* Here’s the compiler error:
+```text
+$ cargo run
+   Compiling ownership v0.1.0 (file:///projects/ownership)
+error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
+  --> src/main.rs:18:5
+   |
+16 |     let word = first_word(&s);
+   |                           -- immutable borrow occurs here
+17 | 
+18 |     s.clear(); // error!
+   |     ^^^^^^^^^ mutable borrow occurs here
+19 | 
+20 |     println!("the first word is: {}", word);
+   |                                       ---- immutable borrow later used here
+
+For more information about this error, try `rustc --explain E0502`.
+error: could not compile `ownership` due to previous error
+```
+
+* Recall from the borrowing rules that:
+    - **if we have an `immutable` reference** to something
+    - we cannot also take a **mutable** reference
+
+
+----
+## String Literals Are Slices
+```rust
+let s = "Hello, world!";
+```
+
+* The type of `s` here is `&str`
+
+* !!!HERE:
+> This is also why **string literals are immutable**;
+>
+>  `&str` is an **immutable** reference
+
+
+----
+## String Slices as Parameters
+
+```rust
+fn first_word(s: &str) -> &str {
+```
+* it allows us to use the same function on both:
+    - `&String` values
+    - and `&str` values
+* If we have a **string slice**, we can pass that directly.
+* If we have a `String`, we can pass a **slice of the String** OR a **reference to the String**.
+
+
+```rust
+fn main() {
+    let my_string = String::from("hello world");
+
+    // `first_word` works on slices of `String`s, whether partial or whole
+    let word = first_word(&my_string[0..6]);
+    let word = first_word(&my_string[..]);
+    // `first_word` also works on references to `String`s, which are equivalent
+    // to whole slices of `String`s
+    let word = first_word(&my_string);
+
+    let my_string_literal = "hello world";
+
+    // `first_word` works on slices of string literals, whether partial or whole
+    let word = first_word(&my_string_literal[0..6]);
+    let word = first_word(&my_string_literal[..]);
+
+    // Because string literals *are* string slices already,
+    // this works too, without the slice syntax!
+    let word = first_word(my_string_literal);
+}
+```
+
+
+----
+## Other Slices
+
+* This slice has the type `&[i32]`
+* It works the same way as string slices do:
+    - by storing a reference to the first element and a length
+* You’ll use this kind of slice for all sorts of other collections. 
+
+
+```rust
+
+let a = [1, 2, 3, 4, 5];
+
+let slice = &a[1..3];
+
+assert_eq!(slice, &[2, 3]);
+```
+
+
+----
+## References
+* `Deref coercions` -> https://doc.rust-lang.org/book/ch15-02-deref.html#implicit-deref-coercions-with-functions-and-methods
 
 
 ---
