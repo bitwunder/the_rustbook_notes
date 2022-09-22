@@ -1,3 +1,4 @@
+[<< Chapter 5 Introduction](../chapter_5/introduction.md_) | [Defining Enums >>](./defining_enums.md)
 # Enums and Pattern Matching
 In this chapter we’ll look at enumerations,
 
