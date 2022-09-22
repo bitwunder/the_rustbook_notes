@@ -1,3 +1,4 @@
+[<< Introduction](./introduction.md_) | [The Match Control Flow >>](./match_control_flow.md)
 # Defining an Enum
 
 * enums give you a way of saying a value is one of a possible set of values
