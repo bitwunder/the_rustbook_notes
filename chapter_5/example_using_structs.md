@@ -1,4 +1,4 @@
-[<< Defining and Instantiating Structs](./1_defining_and_instanciating_structs.md_) | [Method Syntax >>](./3_method_syntax.md)
+[<< Defining and Instantiating Structs](./1_defining_and_instanciating_structs.md_) | [The Match Control Flow >>](./match_control_flow.md)
 
 # An Example Program Using Structs
 > To understand when we might want to use structs,
