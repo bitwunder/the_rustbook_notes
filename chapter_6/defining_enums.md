@@ -1,4 +1,4 @@
-[<< Introduction](./introduction.md_) | [Concise Control with If Let >>](./if_let_control.md)
+[<< Introduction](./introduction.md_) | [The Match Control Flow >>](./match_control_flow.md)
 # Defining an Enum
 
 * enums give you a way of saying a value is one of a possible set of values
