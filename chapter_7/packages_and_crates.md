@@ -1,4 +1,4 @@
-[<< Introduction ](./introduction.md) | [  >>](./modules_controlflow_privacy.md)
+[<< Introduction ](./introduction.md) | [ Paths >>](./modules_controlflow_privacy.md)
 # Packages and Crates
 
 * A **`crate`** is the smallest amount of code that the Rust compiler considers at a time.
