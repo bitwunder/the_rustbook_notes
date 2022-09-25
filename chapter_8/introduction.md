@@ -1,5 +1,5 @@
 ---
-#### [<< Chapter 7 - Separating Modules ](./separating_modules.md) | [ Storing Lists of Values with Vectors >>](./vectors.md)
+#### [<< Chapter 7 - Separating Modules ](../chapter_7/separating_modules.md) | [ Storing Lists of Values with Vectors >>](./vectors.md)
 
 ---
 # Common Collections
